@@ -404,12 +404,12 @@ def func_save_p_no(str_fname_output, int_p_no):
 # 返値: API応答（辞書型）
 # 引数1: p_no
 # 引数2: 銘柄コード（6501等、'':省略時全銘柄取得）
-# 引数3: class_cust_property（request通番）, 口座属性クラス
+# 引数3: class_login_property（request通番）, 口座属性クラス
 # 備考:
 #       銘柄コードは省略可。
 def func_get_genbutu_kabu_list(int_p_no,
                                 str_sIssueCode,
-                                class_cust_property):
+                                class_login_property):
 
     req_item = [class_req()]
     str_p_sd_date = func_p_sd_date(datetime.datetime.now())     # システム時刻を所定の書式で取得
@@ -438,13 +438,13 @@ def func_get_genbutu_kabu_list(int_p_no,
     
     # 返り値の表示形式指定
     str_key = '"sJsonOfmt"'
-    str_value = class_cust_property.sJsonOfmt    # "5"は "1"（ビット目ＯＮ）と”4”（ビット目ＯＮ）の指定となり「ブラウザで見や易い形式」且つ「引数項目名称」で応答を返す値指定
+    str_value = class_login_property.sJsonOfmt    # "5"は "1"（ビット目ＯＮ）と”4”（ビット目ＯＮ）の指定となり「ブラウザで見や易い形式」且つ「引数項目名称」で応答を返す値指定
     req_item.append(class_req())
     req_item[-1].add_data(str_key, str_value)
 
     # URL文字列の作成
     str_url = func_make_url_request(False, \
-                                     class_cust_property.sUrlRequest, \
+                                     class_login_property.sUrlRequest, \
                                      req_item)
 
     json_return = func_api_req(str_url)
